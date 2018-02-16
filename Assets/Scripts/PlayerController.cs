@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	private bool facingRight = true;
-	private bool jump = false;
+	public bool jump = false;
 
 	public float moveForce = 365f;
 	public float maxSpeed = 5f;
@@ -51,7 +51,8 @@ public class PlayerController : MonoBehaviour {
 
 		if(jump)
 		{
-			rigidbody2D.AddForce(Vector2.up * jumpForce);
+			float totalJumpForce = jumpForce + Mathf.Abs(rigidbody2D.velocity.x) * 100f;
+			rigidbody2D.AddForce(Vector2.up * totalJumpForce);
 			jump = false;
 		}
 	}

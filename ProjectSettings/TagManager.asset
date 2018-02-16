@@ -13,7 +13,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Ground
   - 
   - 
   - 
@@ -41,6 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Ground
+    uniqueID: 453840215
+    locked: 0
   - name: Character
     uniqueID: 2964281923
+    locked: 0
+  - name: SideWalls
+    uniqueID: 2546933689
     locked: 0
