@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour {
 	public Transform player;
 	public GameObject wallsPrefab;
 
-	private float currentY;
+	public float currentWallY;
 
 	public float wallTall = 11.5f;
 	public float distanceBeforeSpawn = 10f;
@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour {
 
 	private void Update()
 	{
-		if (currentY - player.position.y < distanceBeforeSpawn)
+		if (currentWallY - player.position.y < distanceBeforeSpawn)
 		{
 			SpawnSideWall();
 		}
@@ -45,10 +45,10 @@ public class LevelManager : MonoBehaviour {
 	{
 		for (int i = 0; i < initialWalls; ++i)
 		{
-			Vector2 pos = new Vector2(0, currentY);
+			Vector2 pos = new Vector2(0, currentWallY);
 			GameObject go = Instantiate(wallsPrefab, pos, Quaternion.identity, transform);
 			wallPool.Add(go);
-			currentY += wallTall;
+			currentWallY += wallTall;
 		}
 	}
 
@@ -65,8 +65,8 @@ public class LevelManager : MonoBehaviour {
 
 	private void SpawnSideWall()
 	{
-		wallPool[0].transform.position = new Vector2(0, currentY);
-		currentY += wallTall;
+		wallPool[0].transform.position = new Vector2(0, currentWallY);
+		currentWallY += wallTall;
 
 		GameObject temp = wallPool[0];
 		wallPool.RemoveAt(0);

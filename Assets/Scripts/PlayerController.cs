@@ -17,6 +17,13 @@ public class PlayerController : MonoBehaviour {
 	private Animator animator;
 	private Rigidbody2D rigidbody2D;
 
+	public ParticleSystem forceJumpEffect;
+	public ParticleSystem moveParticle;
+
+	public float bounceFactor = 1.25f;
+	public float forceJumpLimit = 1700f;
+	public float HorizontalJumpFactor = 100f;
+
 	private void Awake()
 	{
 		animator = GetComponent<Animator>();
@@ -39,19 +46,19 @@ public class PlayerController : MonoBehaviour {
 
 		animator.SetFloat("Speed", Mathf.Abs(h));
 
-		if(h * rigidbody2D.velocity.x < maxSpeed)
+		if(Mathf.Abs(h * rigidbody2D.velocity.x) < maxSpeed)
 			rigidbody2D.AddForce(h * moveForce * Vector2.right);
 
-		if(rigidbody2D.velocity.x > maxSpeed)
-			rigidbody2D.velocity = new Vector2(maxSpeed * Mathf.Sign(h), rigidbody2D.velocity.y);
-
 		if(Mathf.Abs(h) <= 0.05) rigidbody2D.velocity = new Vector2(0, rigidbody2D.velocity.y);
+		else if(isGrounded) moveParticle.Play();	
 
 		if((h > 0 && !facingRight) || (h < 0 && facingRight)) Flip();
 
 		if(jump)
 		{
-			float totalJumpForce = jumpForce + Mathf.Abs(rigidbody2D.velocity.x) * 100f;
+			float totalJumpForce = jumpForce + Mathf.Abs(rigidbody2D.velocity.x) * HorizontalJumpFactor;
+			if(totalJumpForce > forceJumpLimit)
+				forceJumpEffect.Play();
 			rigidbody2D.AddForce(Vector2.up * totalJumpForce);
 			jump = false;
 		}
@@ -63,5 +70,15 @@ public class PlayerController : MonoBehaviour {
 		Vector3 scale = transform.localScale;
 		scale.x *= -1;
 		transform.localScale = scale;
+	}
+
+	private void OnCollisionEnter2D(Collision2D col)
+	{
+		if(col.gameObject.tag == "Wall")
+		{
+			Flip();
+			Vector2 rev = new Vector2(rigidbody2D.velocity.x * bounceFactor, 0);
+			rigidbody2D.AddForce(rev, ForceMode2D.Impulse);
+		}
 	}
 }
