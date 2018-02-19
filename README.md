@@ -11,7 +11,7 @@ Gameplay from the start to the end.
 * You can download the game for your PC device from [here](../../releases/download/v1.0/Groot.Platformer.PC.build.rar).
 
 * You can play the WebGL version from [here]
-(WebGL/index.html).
+(/WebGL/index.html).
 
 ## Software
 
