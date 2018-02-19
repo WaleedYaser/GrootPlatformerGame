@@ -5,22 +5,22 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour {
 
 	public Transform player;
+
+	[Header("Side Walls")]
 	public GameObject wallsPrefab;
-
 	public float currentWallY;
-
 	public float wallTall = 11.5f;
 	public float distanceBeforeSpawn = 10f;
 	public int initialWalls = 6;
-
 	public List<GameObject> wallPool;
-	public List<GameObject> blocksPool;
 
+	[Header("Platforms")]
 	public GameObject blockPrefab;
+	public float currentBlockY;
 	public float distanceBetweenBlocks = 2f;
 	public float distanceBeforeSpawnBlock = 10f;
 	public int initBlocksLine = 10;
-	public float currentBlockY;
+	public List<GameObject> blocksPool;
 
 	private void Awake()
 	{

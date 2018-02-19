@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 251657897853487560}
   m_Layer: 8
   m_Name: Platformer_x3
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -335,7 +335,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 6, y: 0.01}
-  m_EdgeRadius: 0
+  m_EdgeRadius: 0.05
 --- !u!212 &212010329228324080
 SpriteRenderer:
   m_ObjectHideFlags: 1
